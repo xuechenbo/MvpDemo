@@ -67,6 +67,7 @@ public class SystemFragment extends BaseFragment implements SystemFragmentContra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.system_fragment, null);
         Log.e("System", "SystemFragment");
+        Log.e("测试提交", "SystemFragment");
         unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
