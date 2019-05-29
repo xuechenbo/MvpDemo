@@ -1,0 +1,37 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/status_color</item>
+        <item name="colorPrimaryDark">@color/status_color</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--去掉标题栏-->
+        <item name="windowNoTitle">true</item>
+
+
+    </style>
+
+    <!--加载pressbar-->
+    <style name="CustomDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!--忘记密码输入框样式-->
+
+    <style name="ForGetPasswordEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColorHint">#bebebe</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="TabLayoutStyle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+</resources>

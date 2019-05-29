@@ -1,0 +1,124 @@
+apply plugin: 'com.android.application'
+apply from: 'tinker-support.gradle'
+android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('E:/NewHigVisionProject/NewHigVisionProject/playAndroid.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.kahuanbao.com"
+        minSdkVersion 17
+        //22分水岭  22以上动态权限
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+
+    //Glide加载图片
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //轮播图
+
+    //implementation 'com.bigkoo:ConvenientBanner:2.1.4'
+    implementation 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
+
+    //腾讯X5WebView
+    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1310_43612_sharewithdownload_withoutGame_obfs_20180706_163319.jar')
+
+    //Rxjava+Retrofi
+    implementation 'org.glassfish:javax.annotation:10.0-b28'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+    //日志拦截
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
+    //butterknife注解
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    //MMKV代替SharePreference
+    implementation 'com.tencent:mmkv:1.0.17'
+
+    //沉浸式状态栏
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
+
+    //百度身份证识别
+    implementation files('libs/ocr-sdk.jar')
+    implementation project(':ocr_ui')
+
+    //BottomNavigationView   底部导航栏
+    implementation 'com.android.support:design:26.1.0'
+
+    //Dagger2
+
+    /*implementation "com.google.dagger:dagger:2.14.1"
+                annotationProcessor "com.google.dagger:dagger-compiler:2.14.1"*/
+
+    //wheelView
+    implementation 'com.contrarywind:Android-PickerView:4.1.7'
+
+    //刷新加载
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4'
+
+    //agentweb
+    implementation 'com.just.agentweb:agentweb:4.0.2'
+    implementation files('libs/pinyin4j-2.5.0.jar')
+
+    //compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.3.2
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    compile 'com.tencent.bugly:nativecrashreport:latest.release'
+
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+    compile 'com.android.support:multidex:1.0.1'
+
+    // 多dex配置
+
+    // 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
+    compile 'com.tencent.tinker:tinker-android-lib:1.9.9'
+
+
+    compile 'q.rorbin:VerticalTabLayout:1.2.5'
+    //标签流式布局
+    compile 'com.hyman:flowlayout-lib:1.1.2'
+}

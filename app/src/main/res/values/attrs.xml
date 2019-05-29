@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleLayout">
+        <attr name="Title_Name" format="string" />
+        <attr name="Back_Name" format="string" />
+        <attr name="Back_Visible" format="boolean" />
+        <attr name="Other_Name" format="string" />
+        <attr name="Other_Visible" format="boolean" />
+    </declare-styleable>
+</resources>

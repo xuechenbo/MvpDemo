@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.kahuanbao.com.view.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:Title_Name="找回密码"
+        app:Back_Name="返回">
+    </com.kahuanbao.com.view.TitleLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/black_corners_shape"
+        android:layout_margin="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/username"/>
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/phone"
+            android:maxLength="11"
+            style="@style/ForGetPasswordEditTextStyle"
+            android:inputType="number"
+            android:hint="请输入手机号"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/black_corners_shape"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_weight="1"
+                android:id="@+id/check_code"
+                android:maxLength="6"
+                style="@style/ForGetPasswordEditTextStyle"
+                android:inputType="number"
+                android:hint="输入验证码"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_get_check_code"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:textSize="16sp"
+            android:background="@drawable/statuscolor_corners_selector"
+            android:text="@string/regist_vailde_string"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/black_corners_shape"
+        android:layout_margin="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/password"/>
+
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/pwd"
+            android:maxLength="14"
+            style="@style/ForGetPasswordEditTextStyle"
+            android:inputType="textPassword"
+            android:hint="请输入新的密码"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/black_corners_shape"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/password"/>
+
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/confirm_pwd"
+            android:maxLength="14"
+            style="@style/ForGetPasswordEditTextStyle"
+            android:inputType="textPassword"
+            android:hint="确认密码"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/find_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/white"
+        android:background="@drawable/statuscolor_corners_selector"
+        android:text="确定"/>
+</LinearLayout>

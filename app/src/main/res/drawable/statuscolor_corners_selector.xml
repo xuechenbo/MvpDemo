@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item  android:state_pressed="false" >
+        <shape android:shape="rectangle">
+            <corners android:radius="5dp" />
+            <solid android:color="@color/theme_color" />
+            <padding android:bottom="3dp" android:top="3dp" />
+        </shape>
+    </item>
+    <item  android:state_pressed="true" >
+        <shape android:shape="rectangle">
+            <corners android:radius="5dp" />
+            <solid android:color="#b4acac" />
+            <padding android:bottom="3dp" android:top="3dp" />
+        </shape>
+    </item>
+
+    <layer-list>
+        <!-- 第一层阴影 -->
+        <item>
+            <shape>
+                <solid android:color="@android:color/darker_gray" />
+                <corners android:radius="10dp" />
+            </shape>
+        </item>
+        <!--第二层前景 底偏移1dp -->
+        <item android:bottom="1dp">
+            <shape>
+                <solid android:color="@android:color/black" />
+                <corners android:radius="10dp" />
+            </shape>
+        </item>
+    </layer-list>
+    <!--阴影-->
+</selector>

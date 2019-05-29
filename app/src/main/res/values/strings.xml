@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PLayAndroid</string>
+    <string name="loginname">手机号/商户编号</string>
+    <string name="password">密  码</string>
+    <string name="login">登录</string>
+    <string name="regist_vailde_string">获取验证码</string>
+</resources>

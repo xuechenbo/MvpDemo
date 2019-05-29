@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="red">#f11e13</color>
+    <color name="black">#bc5355</color>
+    <color name="black1">#000</color>
+    <color name="white">#FFFFFF</color><!--白色 -->
+    <color name="gray">#DCDCDC</color>
+    <color name="theme_color">#D4AE78</color>
+    <color name="status_color">#D4AE78</color>
+    <color name="white_255">#ffffff</color>
+    <color name="green">#3ddd62</color>
+    <color name="tab_text">#EEEEEE</color>
+    <color name="tab_selected">#EEEEEE</color>
+</resources>
