@@ -33,6 +33,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by Administrator on 2019/3/30.
+ *
  */
 
 public class SystemFragment extends BaseFragment implements SystemFragmentContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
@@ -68,6 +69,7 @@ public class SystemFragment extends BaseFragment implements SystemFragmentContra
         View view = inflater.inflate(R.layout.system_fragment, null);
         Log.e("System", "SystemFragment");
         Log.e("测试提交", "SystemFragment");
+        Log.e("GUI提交", "SystemFragment");
         unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
