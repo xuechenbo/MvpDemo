@@ -95,7 +95,10 @@ public class StartMainActivity extends FragmentActivity implements BottomNavigat
      *
      * @param lastIndex 上个显示Fragment的索引
      * @param index     需要显示的Fragment的索引
+     *
      */
+
+
     public void switchFrament(int lastIndex, int index) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(fragments[lastIndex]);

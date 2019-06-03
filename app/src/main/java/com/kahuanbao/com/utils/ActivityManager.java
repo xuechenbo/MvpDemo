@@ -18,6 +18,7 @@ public class ActivityManager {
 	private static LinkedList<Activity> instance;
 
 	private ActivityManager() {
+
 	}
 
 	public synchronized static LinkedList<Activity> getInstance() {

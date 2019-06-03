@@ -31,6 +31,7 @@ public class BaseActivity extends Activity {
         ActivityManager.getInstance().add(this);
 
         setStatusBar();
+
     }
 
     public void setStatusBar() {

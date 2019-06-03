@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kahuanbao.com.R;
 import com.kahuanbao.com.abother.view.Other;
@@ -25,6 +26,9 @@ import com.kahuanbao.com.network.RetrofitNet;
 import com.kahuanbao.com.utils.ViewUtils;
 import com.kahuanbao.com.v.activity.CollectionActivity;
 import com.tencent.mmkv.MMKV;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -112,7 +116,42 @@ public class MineFragment extends Fragment {
             llMyMessage.setVisibility(View.GONE);
             main.setVisibility(View.VISIBLE);
         }
+
     }
+    private UMShareListener shareListener = new UMShareListener() {
+        /**
+         * @descrption 分享开始的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+        }
+        /**
+         * @descrption 分享成功的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(getActivity(),"成功了",Toast.LENGTH_LONG).show();
+        }
+        /**
+         * @descrption 分享失败的回调
+         * @param platform 平台类型
+         * @param t 错误原因
+         */
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(getActivity(),"失败"+t.getMessage(),Toast.LENGTH_LONG).show();
+        }
+        /**
+         * @descrption 分享取消的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(getActivity(),"取消了",Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -149,10 +188,21 @@ public class MineFragment extends Fragment {
                 requestWeb();
                 break;
             case R.id.ll_yejianmoshi:
-                //clearCookie(getActivity());
+                //分享一下
+               /* new ShareAction(getActivity()).withText("hello")
+                        .setDisplayList(SHARE_MEDIA.QZONE)
+                        .setCallback(shareListener).open();*/
+                new ShareAction(getActivity())
+                        .setPlatform(SHARE_MEDIA.QZONE)//传入平台
+                        .withText("hello")//分享内容
+                        .setCallback(shareListener)//回调监听器
+                        .share();
+
                 break;
         }
     }
+
+
 
     private void requestWeb() {
         RetrofitNet.getInstance(getActivity()).netRequest().collectionWeb()

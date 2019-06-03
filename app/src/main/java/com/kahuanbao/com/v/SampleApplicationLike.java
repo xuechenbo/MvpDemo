@@ -15,6 +15,8 @@ import com.tencent.bugly.beta.interfaces.BetaPatchListener;
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.tinker.entry.DefaultApplicationLike;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -40,7 +42,18 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         initX5();
         initOcR();
         initBugly();
+        initumeng();
+
     }
+
+    private void initumeng() {
+        UMConfigure.setLogEnabled(true);
+        UMConfigure.init(getApplication(),"5cf4b9a20cafb26b6a000f8c"
+                ,"umeng", UMConfigure.DEVICE_TYPE_PHONE,"");
+        PlatformConfig.setQQZone("1109320310", "O7upWmfvvAx0sKYL");
+
+    }
+
     private void initBugly() {
         // 设置是否开启热更新能力，默认为true
         Beta.enableHotfix = true;
