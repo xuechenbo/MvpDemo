@@ -200,7 +200,6 @@ public class MineFragment extends BaseFragment implements MyFragmentContract.Vie
                         .withText("hello")//分享内容
                         .setCallback(shareListener)//回调监听器
                         .share();
-
                 break;
         }
     }
