@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 import com.kahuanbao.com.R;
 import com.kahuanbao.com.abother.view.Other;
+import com.kahuanbao.com.contracts.MyFragmentContract;
 import com.kahuanbao.com.network.RetrofitNet;
+import com.kahuanbao.com.presenter.MyFragmentPresenter;
 import com.kahuanbao.com.utils.ViewUtils;
 import com.kahuanbao.com.v.activity.CollectionActivity;
 import com.tencent.mmkv.MMKV;
@@ -50,7 +52,7 @@ import okhttp3.ResponseBody;
  * Created by Administrator on 2019/3/30.
  */
 
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment implements MyFragmentContract.View {
     @BindView(R.id.title_name)
     TextView titleName;
     @BindView(R.id.back)
@@ -74,6 +76,7 @@ public class MineFragment extends Fragment {
     Switch swit;
     private FragmentActivity activity;
     private MMKV mmkv;
+    private MyFragmentPresenter myFragmentPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,6 +119,7 @@ public class MineFragment extends Fragment {
             llMyMessage.setVisibility(View.GONE);
             main.setVisibility(View.VISIBLE);
         }
+        myFragmentPresenter = new MyFragmentPresenter(getActivity(), this);
 
     }
     private UMShareListener shareListener = new UMShareListener() {
@@ -181,11 +185,10 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getActivity(), CollectionActivity.class));
                 break;
             case R.id.ll_exit:
-                requestDataexit();
-                ViewUtils.makeToast(getActivity(), "wolegequ", 1200);
+                myFragmentPresenter.Exitrequeset();
                 break;
             case R.id.ll_myScWeb:
-                requestWeb();
+
                 break;
             case R.id.ll_yejianmoshi:
                 //分享一下
@@ -203,40 +206,6 @@ public class MineFragment extends Fragment {
     }
 
 
-
-    private void requestWeb() {
-        RetrofitNet.getInstance(getActivity()).netRequest().collectionWeb()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            String string = responseBody.string();
-                            Log.e("WEB", string);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-
     private void requestDataLogin() {
         if (TextUtils.isEmpty(loginPhone.getText().toString().trim())) {
             ViewUtils.makeToast(activity, "请输入账号", 1200);
@@ -246,101 +215,49 @@ public class MineFragment extends Fragment {
             ViewUtils.makeToast(activity, "请输入密码", 1200);
             return;
         }
-        HashMap<String, String> map = new HashMap<>();
-        map.put("username", loginPhone.getText().toString().trim());
-        map.put("password", loginPwd.getText().toString().trim());
-        RetrofitNet.getInstance(activity).netRequest().login(map)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            String string = responseBody.string();
-                            JSONObject jsonObject = new JSONObject(string);
-                            String errorCode = jsonObject.getString("errorCode");
-                            if (errorCode.equals("0")) {
-                                main.setVisibility(View.GONE);
-                                llMyMessage.setVisibility(View.VISIBLE);
-                                name.setText(loginPhone.getText().toString().trim());
-                                ViewUtils.makeToast(activity, "登录成功", 1200);
-                                if (mmkv == null) {
-                                    mmkv = MMKV.mmkvWithID("appMessage");
-                                }
-                                mmkv.encode("name", loginPhone.getText().toString().trim());//用户名
-
-                            } else {
-                                ViewUtils.makeToast(activity, jsonObject.getString("errorMsg"), 1200);
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        myFragmentPresenter.Loginrequest(loginPhone.getText().toString(),loginPwd.getText().toString());
 
     }
 
-    private void requestDataexit() {
-        RetrofitNet.getInstance(activity).netRequest().exit()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+    @Override
+    public void successData() {
 
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) {
-                        try {
-                            String string = responseBody.string();
-                            JSONObject jsonObject = new JSONObject(string);
-                            String errorCode = jsonObject.getString("errorCode");
-                            if (errorCode.equals("0")) {
-                                main.setVisibility(View.VISIBLE);
-                                llMyMessage.setVisibility(View.GONE);
-                                MMKV.mmkvWithID("appMessage").clearAll();
-                                clearCookie(activity);
-                            } else {
-                                ViewUtils.makeToast(activity, jsonObject.getString("errorMsg"), 1200);
-                            }
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 
+    @Override
+    public void LoginSuccess() {
+        main.setVisibility(View.GONE);
+        llMyMessage.setVisibility(View.VISIBLE);
+        name.setText(loginPhone.getText().toString().trim());
+        ViewUtils.makeToast(activity, "登录成功", 1200);
+        if (mmkv == null) {
+            mmkv = MMKV.mmkvWithID("appMessage");
+        }
+        mmkv.encode("name", loginPhone.getText().toString().trim());//用户名
+    }
+
+    @Override
+    public void ExitSuccess() {
+        main.setVisibility(View.VISIBLE);
+        llMyMessage.setVisibility(View.GONE);
+        MMKV.mmkvWithID("appMessage").clearAll();
+        clearCookie(activity);
+    }
+
+    @Override
+    public void requestError(String reason) {
+        ViewUtils.makeToast(getActivity(),reason,1200);
+    }
+
+    @Override
+    public void showDialogPress() {
+        showProgress("正在加载",false);
+    }
+
+    @Override
+    public void dissDialogPress() {
+        hideProgress();
+    }
 
     /**
      * 清除本地Cookie
@@ -357,4 +274,5 @@ public class MineFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
 }

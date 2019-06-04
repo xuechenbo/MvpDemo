@@ -29,6 +29,8 @@ import retrofit2.http.Query;
 
 public interface RequestApi {
 
+
+    //登录
     @POST("user/login")
     @FormUrlEncoded
     Observable<ResponseBody> login(@FieldMap HashMap<String, String> body);
@@ -57,7 +59,6 @@ public interface RequestApi {
     //项目分类
     @GET("project/list/{id}/json?")
     Observable<BaseResp<ProjectListBean>> getProjectList(@Path("id") int num, @Query("cid") String cid);
-
 
     //TODO  返回的数据为JSONARRAY
     //体系

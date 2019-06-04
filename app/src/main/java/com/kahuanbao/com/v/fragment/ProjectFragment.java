@@ -124,7 +124,6 @@ public class ProjectFragment extends Fragment implements ProjectFragmentContract
 
     @Override
     public void onDestroyView() {
-
         unbinder.unbind();
         if (mProjectTreeData != null) {
             mProjectTreeData.clear();
